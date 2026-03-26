@@ -69,14 +69,14 @@ export default function SettingsPage({ onClose }: Props) {
       <div className="settings-container">
         <div className="settings-header">
           <button className="settings-back-btn" onClick={onClose}>
-            ←
+            返回
           </button>
-          <h1 className="settings-page-title">⚙️ 设置</h1>
+          <h1 className="settings-page-title">设置</h1>
         </div>
 
         {/* LLM API 配置 */}
         <div className="settings-section">
-          <h2 className="section-title">🤖 大模型 API 配置</h2>
+          <h2 className="section-title">大模型 API 配置</h2>
           <div className="form-group">
             <label className="form-label">Base URL</label>
             <input
@@ -109,20 +109,20 @@ export default function SettingsPage({ onClose }: Props) {
 
           <div className="form-actions">
             <button className="btn-secondary" onClick={handleTest} disabled={testing}>
-              {testing ? '⏳ 测试中...' : '🔗 测试连接'}
+              {testing ? '测试中...' : '测试连接'}
             </button>
           </div>
 
           {testResult && (
             <div className={`test-result ${testResult.ok ? 'success' : 'error'}`}>
-              {testResult.ok ? '✅' : '❌'} {testResult.msg}
+              {testResult.msg}
             </div>
           )}
         </div>
 
         {/* 搜索设置 */}
         <div className="settings-section">
-          <h2 className="section-title">🔍 搜索设置</h2>
+          <h2 className="section-title">检索设置</h2>
           <div className="form-group">
             <label className="form-label">最大搜索结果数</label>
             <input
@@ -143,7 +143,7 @@ export default function SettingsPage({ onClose }: Props) {
 
         <div className="form-actions">
           <button className="btn-primary" onClick={handleSave} disabled={saving}>
-            {saving ? '保存中...' : '💾 保存设置'}
+            {saving ? '保存中...' : '保存设置'}
           </button>
           <button className="btn-secondary" onClick={onClose}>
             取消

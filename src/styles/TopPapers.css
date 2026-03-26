@@ -1,39 +1,42 @@
 .top-papers {
   display: flex;
   flex-direction: column;
-  gap: 0.8rem;
+  gap: 1rem;
   height: 100%;
   min-height: 0;
   overflow-y: auto;
-  padding-right: 0.35rem;
-  padding-bottom: 0.5rem;
+  padding-right: 0.5rem;
+  padding-bottom: 1rem;
 }
 
 .top-papers-title {
   color: var(--text-secondary);
-  font-size: 0.82rem;
-  font-weight: 600;
-  letter-spacing: 0.3px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
   text-transform: uppercase;
-  margin-bottom: 0.2rem;
+  margin-bottom: 0.5rem;
 }
 
 .top-paper-card {
   display: flex;
-  gap: 1rem;
+  gap: 1.2rem;
   align-items: flex-start;
   background: var(--bg-card);
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--border-light);
   border-radius: var(--radius-md);
-  padding: 1.2rem 1.5rem;
+  padding: 1.5rem;
   transition: all var(--transition-normal);
   animation: fadeIn 0.3s ease forwards;
   opacity: 0;
+  box-shadow: var(--shadow-sm);
 }
 
 .top-paper-card:hover {
   background: var(--bg-card-hover);
-  border-color: var(--border-glow);
+  border-color: var(--border-color);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
 }
 
 .rank-badge {
@@ -44,15 +47,14 @@
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  font-weight: 700;
-  font-size: 0.9rem;
+  font-weight: 600;
+  font-size: 0.95rem;
   font-family: var(--font-mono);
 }
 
 .rank-badge.top3 {
-  background: var(--accent-gradient);
-  color: white;
-  box-shadow: var(--accent-glow);
+  background: var(--text-primary);
+  color: var(--bg-primary);
 }
 
 .rank-badge.normal {
@@ -67,22 +69,25 @@
 }
 
 .top-paper-title {
-  font-size: 0.95rem;
-  font-weight: 600;
+  font-size: 1.1rem;
+  font-weight: 500;
   color: var(--text-primary);
-  margin-bottom: 0.4rem;
-  line-height: 1.4;
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+  font-family: var(--font-serif);
 }
 
 .top-paper-meta {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.8rem;
-  font-size: 0.82rem;
+  gap: 1rem;
+  font-size: 0.9rem;
+  margin-bottom: 0.8rem;
 }
 
 .top-paper-journal {
   color: var(--accent-primary);
+  font-weight: 500;
 }
 
 .top-paper-year {
@@ -92,16 +97,16 @@
 
 .top-paper-scores {
   display: flex;
-  gap: 0.6rem;
-  margin-top: 0.5rem;
+  gap: 0.8rem;
+  margin-top: 0.8rem;
 }
 
 .score-tag {
   background: var(--bg-secondary);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-sm);
-  padding: 0.2rem 0.6rem;
-  font-size: 0.75rem;
+  padding: 0.2rem 0.8rem;
+  font-size: 0.8rem;
   font-family: var(--font-mono);
   color: var(--text-secondary);
 }
@@ -109,22 +114,23 @@
 .top-paper-pubmed-link {
   display: inline-flex;
   align-items: center;
-  margin-top: 0.6rem;
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--accent-primary);
+  margin-top: 1rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-muted);
   text-decoration: none;
   transition: all var(--transition-fast);
+  border: none;
 }
 
 .top-paper-pubmed-link:hover {
-  color: var(--text-primary);
-  text-decoration: underline;
+  color: var(--accent-primary);
+  border: none;
 }
 
 .empty-state {
   text-align: center;
-  padding: 3rem;
+  padding: 4rem;
   color: var(--text-muted);
-  font-size: 1rem;
+  font-size: 0.95rem;
 }

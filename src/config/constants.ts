@@ -15,12 +15,11 @@ export const SEARCH_SUGGESTIONS = [
   'machine learning phenotype prediction',
 ];
 
-/// Tab 标签
 export const RESULT_TABS = [
-  { key: 'papers', label: '📋 论文列表', icon: '📋' },
-  { key: 'network', label: '🕸️ 引用网络', icon: '🕸️' },
-  { key: 'core', label: '🏆 核心论文', icon: '🏆' },
-  { key: 'report', label: '📄 AI 报告', icon: '📄' },
+  { key: 'papers', label: '文献列表' },
+  { key: 'network', label: '引用网络' },
+  { key: 'core', label: '核心文献' },
+  { key: 'report', label: '研究报告' },
 ] as const;
 
 export type TabKey = (typeof RESULT_TABS)[number]['key'];

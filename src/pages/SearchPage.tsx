@@ -61,14 +61,13 @@ export default function SearchPage({ onSearchComplete, onOpenSettings }: Props) 
 
   return (
     <div className="search-page">
-      <button className="settings-btn" onClick={onOpenSettings} title="Settings">
-        ⚙️
+      <button className="settings-btn" onClick={onOpenSettings} title="设置">
+        设置
       </button>
 
       <div className="search-header">
-        <div className="search-logo">🔬</div>
         <h1 className="search-title">ScholarLens</h1>
-        <p className="search-subtitle">智能科研文献分析 · 引用网络 · 核心论文发现</p>
+        <p className="search-subtitle">为您梳理学术脉络与核心文献</p>
       </div>
 
       <div className="search-box-wrapper">
@@ -82,7 +81,7 @@ export default function SearchPage({ onSearchComplete, onOpenSettings }: Props) 
             autoFocus
           />
           <button className="search-btn" type="submit" disabled={loading || !query.trim()}>
-            🔍 搜索
+            搜索
           </button>
         </form>
 
@@ -97,7 +96,7 @@ export default function SearchPage({ onSearchComplete, onOpenSettings }: Props) 
           ))}
         </div>
 
-        {error && <div className="error-message">❌ {error}</div>}
+        {error && <div className="error-message">{error}</div>}
       </div>
 
       {history.length > 0 && (
@@ -110,7 +109,7 @@ export default function SearchPage({ onSearchComplete, onOpenSettings }: Props) 
                 className="history-item"
                 onClick={() => { setQuery(h.query); handleSearch(h.query); }}
               >
-                <span>🕐 {h.query}</span>
+                <span className="history-query">{h.query}</span>
                 <span className="history-count">{h.resultCount} 篇</span>
               </button>
             ))}
@@ -121,7 +120,7 @@ export default function SearchPage({ onSearchComplete, onOpenSettings }: Props) 
       {loading && (
         <div className="loading-overlay">
           <div className="loading-spinner" />
-          <div className="loading-text">正在搜索 PubMed 文献...</div>
+          <div className="loading-text">正在检索文献，请稍候...</div>
         </div>
       )}
     </div>

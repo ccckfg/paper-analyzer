@@ -1,44 +1,54 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Noto+Serif+SC:wght@400;500;600;700&display=swap');
 
 :root {
-  /* 深色科研风格主题 */
-  --bg-primary: #0a0e1a;
-  --bg-secondary: #111827;
-  --bg-card: #1a2035;
-  --bg-card-hover: #1f2847;
-  --bg-glass: rgba(26, 32, 53, 0.7);
+  /* 暖白主题 (参考 Claude 设计) */
+  --bg-primary: #FCFCFA;
+  --bg-secondary: #F3F2EE;
+  --bg-card: #FFFFFF;
+  --bg-card-hover: #FDFCF9;
+  --bg-glass: rgba(255, 255, 255, 0.85);
 
-  --text-primary: #e8eaf0;
-  --text-secondary: #9ca3af;
-  --text-muted: #6b7280;
+  --text-primary: #2C2C2A;
+  --text-secondary: #5F5E5B;
+  --text-muted: #8E8D8A;
 
-  --accent-primary: #3b82f6;
-  --accent-secondary: #8b5cf6;
-  --accent-gradient: linear-gradient(135deg, #3b82f6, #8b5cf6);
-  --accent-glow: 0 0 20px rgba(59, 130, 246, 0.3);
+  --accent-primary: #D97757; /* 沉稳的暗橙/陶土色 */
+  --accent-secondary: #B95737;
+  --accent-light: rgba(217, 119, 87, 0.08);
 
-  --danger: #ef4444;
-  --success: #10b981;
-  --warning: #f59e0b;
+  --danger: #cf5c5c;
+  --success: #5f8d68;
+  --warning: #d99c57;
 
-  --border-color: rgba(255, 255, 255, 0.08);
-  --border-glow: rgba(59, 130, 246, 0.2);
+  --border-color: rgba(0, 0, 0, 0.06);
+  --border-light: rgba(0, 0, 0, 0.03);
 
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
-  --radius-xl: 24px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
 
-  --shadow-sm: 0 2px 8px rgba(0,0,0,0.3);
-  --shadow-md: 0 4px 16px rgba(0,0,0,0.4);
-  --shadow-lg: 0 8px 32px rgba(0,0,0,0.5);
+  /* 弱阴影 (原则 4) */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.02);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.03);
+  --shadow-lg: 0 12px 24px rgba(0, 0, 0, 0.04);
 
-  --font-sans: 'Outfit', system-ui, -apple-system, sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
+  /* 排版 (原则 2) */
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-serif: 'Noto Serif SC', 'Georgia', serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
-  --transition-fast: 150ms ease;
-  --transition-normal: 250ms ease;
-  --transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+  /* 动效安静 (原则 7) */
+  --transition-fast: 150ms ease-out;
+  --transition-normal: 250ms ease-out;
+  --transition-slow: 400ms ease-out;
+
+  /* 移动端专用变量 */
+  --mobile-bottom-bar-height: 56px;
+  --safe-area-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-area-top: env(safe-area-inset-top, 0px);
+  --mobile-header-height: 52px;
+  --touch-target-min: 44px;
 }
 
 * {
@@ -69,14 +79,22 @@ html, body {
   flex-direction: column;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
 a {
-  color: var(--accent-primary);
+  color: var(--text-secondary);
   text-decoration: none;
-  transition: color var(--transition-fast);
+  border-bottom: 1px solid transparent;
+  transition: all var(--transition-fast);
 }
 
 a:hover {
-  color: var(--accent-secondary);
+  color: var(--text-primary);
+  border-bottom-color: var(--border-color);
 }
 
 button {
@@ -84,6 +102,7 @@ button {
   cursor: pointer;
   border: none;
   outline: none;
+  background: transparent;
 }
 
 input, textarea {
@@ -101,23 +120,18 @@ input, textarea {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(255,255,255,0.15);
+  background: rgba(0,0,0,0.1);
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255,255,255,0.25);
+  background: rgba(0,0,0,0.2);
 }
 
-/* 通用动画 */
+/* 渐显动效 */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
+  from { opacity: 0; transform: translateY(4px); }
   to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
 }
 
 @keyframes spin {
@@ -125,5 +139,24 @@ input, textarea {
 }
 
 .fade-in {
-  animation: fadeIn 0.4s var(--transition-slow) forwards;
+  animation: fadeIn 0.3s var(--transition-slow) forwards;
+}
+
+/* ==========================================
+   MOBILE RESPONSIVE — 全局基础
+   ========================================== */
+@media (max-width: 768px) {
+  html, body {
+    font-size: 14px;
+    overflow: auto;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
 }

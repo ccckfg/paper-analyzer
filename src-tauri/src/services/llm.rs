@@ -88,14 +88,21 @@ pub async fn test_connection(config: &LlmConfig) -> Result<String, String> {
     };
 
     let body = send_chat_completion(config, &request).await?;
-    extract_llm_text(&body)
-        .map(|_| "Connection successful!".to_string())
-        .map_err(|e| {
-            format!(
-                "Connection succeeded but response format is unsupported: {}",
-                e
-            )
-        })
+
+    // 只要是合法 JSON 且不包含 API 错误字段，就认为连接成功
+    let json: Value = serde_json::from_str(&body).map_err(|e| {
+        format!("Connection succeeded but response is not valid JSON: {}", e)
+    })?;
+
+    if let Some(err_msg) = extract_error_from_json(&json) {
+        return Err(format!("API returned error: {}", err_msg));
+    }
+
+    // 尝试提取文本用于展示，但提取失败不视为错误
+    match extract_llm_text(&body) {
+        Ok(text) => Ok(format!("Connection successful! Model responded: {}", truncate_text(&text, 60))),
+        Err(_) => Ok("Connection successful!".to_string()),
+    }
 }
 
 async fn send_chat_completion(config: &LlmConfig, request: &ChatRequest) -> Result<String, String> {

@@ -47,8 +47,9 @@ export default function ResultsPage({
       {/* Header */}
       <div className="results-header">
         <button className="back-btn" onClick={onBack} title="返回首页">
-          ← 
+          返回
         </button>
+        <div className="mobile-header-title">{query}</div>
         <form className="results-search-box" onSubmit={handleNewSearch}>
           <input
             className="results-search-input"
@@ -61,12 +62,12 @@ export default function ResultsPage({
             type="submit"
             disabled={loading}
           >
-            {loading ? '⏳' : '🔍'} 搜索
+            {loading ? '检索中...' : '搜索'}
           </button>
         </form>
         <div className="header-actions">
           <button className="header-settings-btn" onClick={onOpenSettings}>
-            ⚙️
+            设置
           </button>
         </div>
       </div>
@@ -87,7 +88,7 @@ export default function ResultsPage({
       {/* Content */}
       <div className="results-content">
         <div className="result-count">
-          「{query}」共找到 {papers.length} 篇文献
+          关于 “{query}” 的检索结果 ({papers.length} 篇文献)
         </div>
 
         <div className="tab-panel">
@@ -101,7 +102,7 @@ export default function ResultsPage({
       {loading && (
         <div className="loading-overlay">
           <div className="loading-spinner" />
-          <div className="loading-text">正在搜索...</div>
+          <div className="loading-text">正在检索，请稍候...</div>
         </div>
       )}
     </div>

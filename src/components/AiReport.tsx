@@ -93,11 +93,11 @@ export default function AiReport() {
           onClick={handleGenerate}
           disabled={loading || !isConfigured}
         >
-          {loading ? '⏳ 生成中...' : '🤖 生成 AI 分析报告'}
+          {loading ? '生成中...' : '生成科研分析报告'}
         </button>
         {!isConfigured && (
           <span className="report-hint">
-            ⚠️ 请先在设置中配置大模型 API
+            请先在设置中配置 API
           </span>
         )}
       </div>
@@ -105,11 +105,11 @@ export default function AiReport() {
       {loading && (
         <div className="report-generating">
           <div className="loading-spinner" />
-          <span>AI 正在流式生成报告，请稍候...</span>
+          <span>正在生成报告，请稍候...</span>
         </div>
       )}
 
-      {error && <div className="report-error">❌ {error}</div>}
+      {error && <div className="report-error">{error}</div>}
 
       {report && (
         <div className="report-content">

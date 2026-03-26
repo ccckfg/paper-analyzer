@@ -27,7 +27,7 @@ export default function TopPapers() {
   }
 
   if (error) {
-    return <div className="empty-state">❌ {error}</div>;
+    return <div className="empty-state">{error}</div>;
   }
 
   if (papers.length === 0) {
@@ -68,7 +68,7 @@ export default function TopPapers() {
               rel="noopener noreferrer"
               className="top-paper-pubmed-link"
             >
-              📖 在 PubMed 中打开 ↗
+              前往 PubMed 阅读 ↗
             </a>
           </div>
         </div>

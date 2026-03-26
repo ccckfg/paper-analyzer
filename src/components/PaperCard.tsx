@@ -21,7 +21,7 @@ export default function PaperCard({ paper, index }: Props) {
         <span className="paper-pmid">PMID: {paper.pmid}</span>
         {paper.citation_count > 0 && (
           <span className="paper-citations">
-            🔥 {paper.citation_count} cited
+            {paper.citation_count} 被引
           </span>
         )}
       </div>
@@ -37,7 +37,7 @@ export default function PaperCard({ paper, index }: Props) {
         target="_blank"
         rel="noopener noreferrer"
       >
-        📖 View on PubMed ↗
+        前往 PubMed 阅读 ↗
       </a>
     </div>
   );
