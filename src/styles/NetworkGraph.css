@@ -1,0 +1,201 @@
+.network-container {
+  width: 100%;
+  height: 100%;
+  min-height: 460px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  position: relative;
+}
+
+.network-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: 1rem;
+}
+
+.network-loading .loading-spinner {
+  width: 40px;
+  height: 40px;
+}
+
+.network-legend {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  background: var(--bg-glass);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 0.8rem 1rem;
+  display: flex;
+  gap: 1.2rem;
+  font-size: 0.8rem;
+  z-index: 10;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--text-secondary);
+}
+
+.legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.legend-dot.core { background: #ef4444; }
+.legend-dot.normal { background: #6b7280; }
+
+.network-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: var(--text-secondary);
+  gap: 1rem;
+}
+
+.retry-btn {
+  background: var(--accent-gradient);
+  color: white;
+  border-radius: var(--radius-sm);
+  padding: 0.5rem 1.2rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+/* ===============================
+   网络图右侧交互详情面板
+   =============================== */
+.network-detail-panel {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  width: 320px;
+  max-height: calc(100% - 3rem);
+  background: var(--bg-glass);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-lg), 0 0 20px rgba(0, 0, 0, 0.3);
+  z-index: 20;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  border-top: 3px solid var(--accent-primary);
+  animation: fadeIn 0.3s ease forwards;
+}
+
+.panel-close-btn {
+  position: absolute;
+  top: 0.8rem;
+  right: 0.8rem;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 1.2rem;
+  border: none;
+  cursor: pointer;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all var(--transition-fast);
+}
+
+.panel-close-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+}
+
+.detail-pmid {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  margin-bottom: 0.4rem;
+}
+
+.detail-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.8rem;
+  line-height: 1.4;
+  padding-right: 1.5rem;
+}
+
+.detail-meta {
+  display: flex;
+  gap: 0.8rem;
+  margin-bottom: 0.8rem;
+  font-size: 0.85rem;
+}
+
+.detail-journal {
+  color: var(--accent-primary);
+  font-weight: 600;
+}
+
+.detail-year {
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+
+.detail-authors {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+.detail-citations {
+  display: inline-block;
+  background: rgba(239, 68, 68, 0.15);
+  color: var(--danger);
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  align-self: flex-start;
+  margin-bottom: 1.2rem;
+}
+
+.detail-actions {
+  margin-top: auto;
+  border-top: 1px solid var(--border-color);
+  padding-top: 1rem;
+}
+
+.detail-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent-gradient);
+  color: white;
+  padding: 0.6rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: all var(--transition-fast);
+  text-decoration: none;
+}
+
+.detail-link:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--accent-glow);
+  color: white;
+}
+

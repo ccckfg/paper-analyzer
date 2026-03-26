@@ -1,0 +1,129 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  /* 深色科研风格主题 */
+  --bg-primary: #0a0e1a;
+  --bg-secondary: #111827;
+  --bg-card: #1a2035;
+  --bg-card-hover: #1f2847;
+  --bg-glass: rgba(26, 32, 53, 0.7);
+
+  --text-primary: #e8eaf0;
+  --text-secondary: #9ca3af;
+  --text-muted: #6b7280;
+
+  --accent-primary: #3b82f6;
+  --accent-secondary: #8b5cf6;
+  --accent-gradient: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  --accent-glow: 0 0 20px rgba(59, 130, 246, 0.3);
+
+  --danger: #ef4444;
+  --success: #10b981;
+  --warning: #f59e0b;
+
+  --border-color: rgba(255, 255, 255, 0.08);
+  --border-glow: rgba(59, 130, 246, 0.2);
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.3);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.4);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,0.5);
+
+  --font-sans: 'Outfit', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --transition-fast: 150ms ease;
+  --transition-normal: 250ms ease;
+  --transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+}
+
+#root {
+  height: 100%;
+}
+
+.app-container {
+  height: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  color: var(--accent-primary);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--accent-secondary);
+}
+
+button {
+  font-family: var(--font-sans);
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+input, textarea {
+  font-family: var(--font-sans);
+  outline: none;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.15);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+/* 通用动画 */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.fade-in {
+  animation: fadeIn 0.4s var(--transition-slow) forwards;
+}

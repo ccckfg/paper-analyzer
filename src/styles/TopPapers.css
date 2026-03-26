@@ -1,0 +1,130 @@
+.top-papers {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  height: 100%;
+  min-height: 0;
+  overflow-y: auto;
+  padding-right: 0.35rem;
+  padding-bottom: 0.5rem;
+}
+
+.top-papers-title {
+  color: var(--text-secondary);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  margin-bottom: 0.2rem;
+}
+
+.top-paper-card {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 1.2rem 1.5rem;
+  transition: all var(--transition-normal);
+  animation: fadeIn 0.3s ease forwards;
+  opacity: 0;
+}
+
+.top-paper-card:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--border-glow);
+}
+
+.rank-badge {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-weight: 700;
+  font-size: 0.9rem;
+  font-family: var(--font-mono);
+}
+
+.rank-badge.top3 {
+  background: var(--accent-gradient);
+  color: white;
+  box-shadow: var(--accent-glow);
+}
+
+.rank-badge.normal {
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+}
+
+.top-paper-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.top-paper-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.4rem;
+  line-height: 1.4;
+}
+
+.top-paper-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  font-size: 0.82rem;
+}
+
+.top-paper-journal {
+  color: var(--accent-primary);
+}
+
+.top-paper-year {
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+
+.top-paper-scores {
+  display: flex;
+  gap: 0.6rem;
+  margin-top: 0.5rem;
+}
+
+.score-tag {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 0.2rem 0.6rem;
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  color: var(--text-secondary);
+}
+
+.top-paper-pubmed-link {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 0.6rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--accent-primary);
+  text-decoration: none;
+  transition: all var(--transition-fast);
+}
+
+.top-paper-pubmed-link:hover {
+  color: var(--text-primary);
+  text-decoration: underline;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 3rem;
+  color: var(--text-muted);
+  font-size: 1rem;
+}

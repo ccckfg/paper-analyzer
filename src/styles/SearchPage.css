@@ -1,0 +1,260 @@
+.search-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 背景装饰 */
+.search-page::before {
+  content: '';
+  position: absolute;
+  top: -30%;
+  left: -10%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(59,130,246,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.search-page::after {
+  content: '';
+  position: absolute;
+  bottom: -20%;
+  right: -10%;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(139,92,246,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.search-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  animation: fadeIn 0.6s ease forwards;
+}
+
+.search-logo {
+  font-size: 3.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.search-title {
+  font-size: 2.8rem;
+  font-weight: 700;
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.5px;
+}
+
+.search-subtitle {
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+  font-weight: 300;
+  margin-top: 0.5rem;
+}
+
+.search-box-wrapper {
+  width: 100%;
+  max-width: 680px;
+  animation: fadeIn 0.6s ease 0.15s forwards;
+  opacity: 0;
+}
+
+.search-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xl);
+  padding: 0.25rem 0.25rem 0.25rem 1.5rem;
+  transition: all var(--transition-normal);
+  box-shadow: var(--shadow-md);
+}
+
+.search-box:focus-within {
+  border-color: var(--accent-primary);
+  box-shadow: var(--accent-glow), var(--shadow-md);
+}
+
+.search-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  font-size: 1.1rem;
+  padding: 1rem 0;
+  font-family: var(--font-sans);
+}
+
+.search-input::placeholder {
+  color: var(--text-muted);
+}
+
+.search-btn {
+  background: var(--accent-gradient);
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 0.85rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all var(--transition-normal);
+  white-space: nowrap;
+}
+
+.search-btn:hover:not(:disabled) {
+  transform: scale(1.03);
+  box-shadow: var(--accent-glow);
+}
+
+.search-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.search-suggestions {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  justify-content: center;
+  animation: fadeIn 0.6s ease 0.3s forwards;
+  opacity: 0;
+}
+
+.suggestion-chip {
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xl);
+  padding: 0.4rem 1rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.suggestion-chip:hover {
+  background: var(--bg-card-hover);
+  color: var(--text-primary);
+  border-color: var(--accent-primary);
+}
+
+/* 搜索历史 */
+.search-history {
+  margin-top: 2.5rem;
+  width: 100%;
+  max-width: 680px;
+  animation: fadeIn 0.6s ease 0.4s forwards;
+  opacity: 0;
+}
+
+.history-title {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 0.8rem;
+}
+
+.history-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.history-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: transparent;
+  color: var(--text-secondary);
+  width: 100%;
+  padding: 0.6rem 1rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  text-align: left;
+  transition: all var(--transition-fast);
+}
+
+.history-item:hover {
+  background: var(--bg-card);
+  color: var(--text-primary);
+}
+
+.history-count {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+
+/* 右上角设置按钮 */
+.settings-btn {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+  z-index: 10;
+}
+
+.settings-btn:hover {
+  background: var(--bg-card-hover);
+  color: var(--text-primary);
+  border-color: var(--accent-primary);
+}
+
+/* Loading overlay */
+.loading-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(10,14,26,0.85);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  backdrop-filter: blur(8px);
+}
+
+.loading-spinner {
+  width: 48px;
+  height: 48px;
+  border: 3px solid rgba(255,255,255,0.1);
+  border-top-color: var(--accent-primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin-bottom: 1.5rem;
+}
+
+.loading-text {
+  color: var(--text-secondary);
+  font-size: 1rem;
+}
+
+.error-message {
+  margin-top: 1rem;
+  color: var(--danger);
+  font-size: 0.9rem;
+  text-align: center;
+  max-width: 500px;
+}

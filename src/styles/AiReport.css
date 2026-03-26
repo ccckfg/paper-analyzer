@@ -1,0 +1,167 @@
+.ai-report {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  overflow-y: auto;
+  padding-right: 0.35rem;
+}
+
+.report-actions {
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.generate-btn {
+  background: var(--accent-gradient);
+  color: white;
+  border-radius: var(--radius-sm);
+  padding: 0.7rem 1.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all var(--transition-fast);
+}
+
+.generate-btn:hover:not(:disabled) {
+  transform: scale(1.02);
+  box-shadow: var(--accent-glow);
+}
+
+.generate-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.report-hint {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.report-content {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  animation: fadeIn 0.4s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.report-content h1,
+.report-content h2,
+.report-content h3 {
+  color: var(--text-primary);
+  margin-top: 1.5rem;
+  margin-bottom: 0.6rem;
+}
+
+.report-content h1 { font-size: 1.5rem; }
+.report-content h2 { font-size: 1.25rem; }
+.report-content h3 { font-size: 1.1rem; }
+
+.report-content p {
+  color: var(--text-secondary);
+  margin-bottom: 0.8rem;
+  line-height: 1.7;
+}
+
+.report-content ul, .report-content ol {
+  color: var(--text-secondary);
+  padding-left: 1.5rem;
+  margin-bottom: 0.8rem;
+}
+
+.report-content li {
+  margin-bottom: 0.3rem;
+  line-height: 1.7;
+}
+
+.report-content strong {
+  color: var(--text-primary);
+}
+
+.report-content code {
+  background: var(--bg-secondary);
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+}
+
+.report-content pre {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 1rem;
+  overflow-x: auto;
+  margin-bottom: 1rem;
+}
+
+.report-content pre code {
+  background: transparent;
+  padding: 0;
+}
+
+/* remark-gfm 表格样式 */
+.report-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+.report-content th,
+.report-content td {
+  border: 1px solid var(--border-color);
+  padding: 0.5rem 0.8rem;
+  text-align: left;
+  color: var(--text-secondary);
+}
+
+.report-content th {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.report-content tr:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+/* remark-gfm 删除线 */
+.report-content del {
+  color: var(--text-muted);
+}
+
+/* 块引用 */
+.report-content blockquote {
+  border-left: 3px solid var(--accent-primary);
+  margin: 0 0 1rem 0;
+  padding: 0.5rem 1rem;
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+.report-error {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: var(--radius-sm);
+  padding: 1rem;
+  color: var(--danger);
+  font-size: 0.9rem;
+}
+
+.report-generating {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3rem;
+  gap: 1rem;
+  color: var(--text-secondary);
+}
+
