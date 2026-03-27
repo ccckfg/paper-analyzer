@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Noto+Serif+SC:wght@400;500;600;700&display=swap');
-
 :root {
   /* 暖白主题 (参考 Claude 设计) */
   --bg-primary: #FCFCFA;
@@ -34,8 +32,10 @@
   --shadow-lg: 0 12px 24px rgba(0, 0, 0, 0.04);
 
   /* 排版 (原则 2) */
-  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-serif: 'Noto Serif SC', 'Georgia', serif;
+  --font-sans: 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei',
+    'Noto Sans CJK SC', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-serif: 'Noto Serif CJK SC', 'Source Han Serif SC', 'Songti SC',
+    'STSong', 'SimSun', serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
   /* 动效安静 (原则 7) */

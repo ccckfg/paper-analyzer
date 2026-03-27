@@ -107,6 +107,9 @@ jobs:
       - name: Initialize Tauri Android
         run: npx tauri android init
 
+      - name: Generate App Icons
+        run: npx tauri icon src-tauri/icons/icon.png
+
       - name: Decode Keystore
         run: echo "${{ secrets.ANDROID_KEYSTORE_BASE64 }}" | base64 -d > /tmp/scholarlens.keystore
 
