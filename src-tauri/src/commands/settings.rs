@@ -22,6 +22,11 @@ pub async fn save_settings(app: tauri::AppHandle, mut settings: AppSettings) -> 
         "app_settings",
         serde_json::to_value(&settings).map_err(|e| e.to_string())?,
     );
+    // 兼容历史 key
+    store.set(
+        "settings",
+        serde_json::to_value(&settings).map_err(|e| e.to_string())?,
+    );
     store.save().map_err(|e| e.to_string())?;
     Ok(())
 }
@@ -31,11 +36,10 @@ pub async fn save_settings(app: tauri::AppHandle, mut settings: AppSettings) -> 
 pub async fn load_settings(app: tauri::AppHandle) -> Result<AppSettings, String> {
     use tauri_plugin_store::StoreExt;
     let store = app.store("settings.json").map_err(|e| e.to_string())?;
-    let val = store.get("app_settings");
+    let val = store.get("app_settings").or_else(|| store.get("settings"));
     match val {
         Some(v) => {
-            let mut settings: AppSettings =
-                serde_json::from_value(v.clone()).map_err(|e| e.to_string())?;
+            let mut settings: AppSettings = serde_json::from_value(v.clone()).unwrap_or_default();
             settings.max_results = normalize_max_results(settings.max_results);
             Ok(settings)
         }

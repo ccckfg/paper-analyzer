@@ -94,11 +94,19 @@
   font-weight: 300;
 }
 
+.form-input.input-error {
+  border-color: var(--danger);
+}
+
 .form-hint {
   font-size: 0.85rem;
   color: var(--text-muted);
   margin-top: 0.6rem;
   line-height: 1.5;
+}
+
+.form-hint.error {
+  color: var(--danger);
 }
 
 .form-actions {

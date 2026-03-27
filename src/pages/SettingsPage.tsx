@@ -22,24 +22,46 @@ const DEFAULT_SETTINGS: AppSettings = {
   max_results: DEFAULT_MAX_RESULTS,
 };
 
+function validateMaxResultsInput(input: string): string {
+  const value = input.trim();
+  if (!value) {
+    return `请输入 ${MIN_MAX_RESULTS}-${MAX_MAX_RESULTS} 之间的整数`;
+  }
+  if (!/^\d+$/.test(value)) {
+    return '最大搜索结果数只能是整数';
+  }
+  const parsed = Number(value);
+  if (parsed < MIN_MAX_RESULTS || parsed > MAX_MAX_RESULTS) {
+    return `范围需在 ${MIN_MAX_RESULTS}-${MAX_MAX_RESULTS} 之间`;
+  }
+  return '';
+}
+
 export default function SettingsPage({ onClose }: Props) {
   const [settings, setSettings] = useState<AppSettings>(DEFAULT_SETTINGS);
+  const [maxResultsInput, setMaxResultsInput] = useState(String(DEFAULT_MAX_RESULTS));
   const [testResult, setTestResult] = useState<{
     ok: boolean;
     msg: string;
   } | null>(null);
   const [saving, setSaving] = useState(false);
   const [testing, setTesting] = useState(false);
+  const maxResultsError = validateMaxResultsInput(maxResultsInput);
 
   useEffect(() => {
     loadSettings()
-      .then(s =>
+      .then(s => {
+        const normalizedMaxResults = normalizeMaxResults(s.max_results);
         setSettings({
           ...s,
-          max_results: normalizeMaxResults(s.max_results),
-        })
-      )
-      .catch(console.error);
+          max_results: normalizedMaxResults,
+        });
+        setMaxResultsInput(String(normalizedMaxResults));
+      })
+      .catch(() => {
+        setSettings(DEFAULT_SETTINGS);
+        setMaxResultsInput(String(DEFAULT_MAX_RESULTS));
+      });
   }, []);
 
   const updateLlm = (field: string, value: string) => {
@@ -51,9 +73,17 @@ export default function SettingsPage({ onClose }: Props) {
   };
 
   const handleSave = async () => {
+    if (maxResultsError) return;
+
+    const nextSettings: AppSettings = {
+      ...settings,
+      max_results: Number(maxResultsInput.trim()),
+    };
+
     setSaving(true);
     try {
-      await saveSettings(settings);
+      await saveSettings(nextSettings);
+      setSettings(nextSettings);
       onClose();
     } catch (err) {
       console.error(err);
@@ -137,24 +167,25 @@ export default function SettingsPage({ onClose }: Props) {
           <div className="form-group">
             <label className="form-label">最大搜索结果数</label>
             <input
-              className="form-input"
-              type="number"
-              value={settings.max_results}
-              onChange={e =>
-                setSettings(prev => ({
-                  ...prev,
-                  max_results: normalizeMaxResults(parseInt(e.target.value, 10)),
-                }))
-              }
-              min={MIN_MAX_RESULTS}
-              max={MAX_MAX_RESULTS}
+              className={`form-input ${maxResultsError ? 'input-error' : ''}`}
+              type="text"
+              inputMode="numeric"
+              pattern="[0-9]*"
+              value={maxResultsInput}
+              onChange={e => setMaxResultsInput(e.target.value)}
             />
-            <div className="form-hint">建议范围：{MIN_MAX_RESULTS} - {MAX_MAX_RESULTS}</div>
+            <div className={`form-hint ${maxResultsError ? 'error' : ''}`}>
+              {maxResultsError || `建议范围：${MIN_MAX_RESULTS} - ${MAX_MAX_RESULTS}`}
+            </div>
           </div>
         </div>
 
         <div className="form-actions">
-          <button className="btn-primary" onClick={handleSave} disabled={saving}>
+          <button
+            className="btn-primary"
+            onClick={handleSave}
+            disabled={saving || Boolean(maxResultsError)}
+          >
             {saving ? '保存中...' : '保存设置'}
           </button>
           <button className="btn-secondary" onClick={onClose}>
