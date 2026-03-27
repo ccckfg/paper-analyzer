@@ -4,6 +4,12 @@ import {
   saveSettings,
   testLlmConnection,
 } from '../services/tauriCommands';
+import {
+  DEFAULT_MAX_RESULTS,
+  MAX_MAX_RESULTS,
+  MIN_MAX_RESULTS,
+  normalizeMaxResults,
+} from '../config/constants';
 import type { AppSettings } from '../types';
 import '../styles/SettingsPage.css';
 
@@ -13,7 +19,7 @@ interface Props {
 
 const DEFAULT_SETTINGS: AppSettings = {
   llm: { base_url: '', api_key: '', model: '' },
-  max_results: 50,
+  max_results: DEFAULT_MAX_RESULTS,
 };
 
 export default function SettingsPage({ onClose }: Props) {
@@ -27,7 +33,12 @@ export default function SettingsPage({ onClose }: Props) {
 
   useEffect(() => {
     loadSettings()
-      .then(s => setSettings(s))
+      .then(s =>
+        setSettings({
+          ...s,
+          max_results: normalizeMaxResults(s.max_results),
+        })
+      )
       .catch(console.error);
   }, []);
 
@@ -132,12 +143,13 @@ export default function SettingsPage({ onClose }: Props) {
               onChange={e =>
                 setSettings(prev => ({
                   ...prev,
-                  max_results: parseInt(e.target.value) || 50,
+                  max_results: normalizeMaxResults(parseInt(e.target.value, 10)),
                 }))
               }
-              min={10}
-              max={200}
+              min={MIN_MAX_RESULTS}
+              max={MAX_MAX_RESULTS}
             />
+            <div className="form-hint">建议范围：{MIN_MAX_RESULTS} - {MAX_MAX_RESULTS}</div>
           </div>
         </div>
 

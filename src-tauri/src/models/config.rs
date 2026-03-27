@@ -9,8 +9,17 @@ pub struct LlmConfig {
 }
 
 /// 应用设置
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AppSettings {
     pub llm: LlmConfig,
     pub max_results: u32,
+}
+
+impl Default for AppSettings {
+    fn default() -> Self {
+        Self {
+            llm: LlmConfig::default(),
+            max_results: 50,
+        }
+    }
 }

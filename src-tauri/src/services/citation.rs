@@ -49,8 +49,8 @@ pub async fn fetch_citations(papers: &mut Vec<Paper>) -> Result<(), String> {
             .await
             .map_err(|e| format!("Failed to read iCite response: {}", e))?;
 
-        let parsed: ICiteResponse = serde_json::from_str(&body)
-            .map_err(|e| format!("iCite JSON parse error: {}", e))?;
+        let parsed: ICiteResponse =
+            serde_json::from_str(&body).map_err(|e| format!("iCite JSON parse error: {}", e))?;
 
         for entry in parsed.data {
             let pmid_str = entry.pmid.to_string();

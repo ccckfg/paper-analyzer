@@ -283,10 +283,10 @@
   }
 
   .settings-btn {
-    top: 1rem;
+    top: calc(1rem + var(--safe-area-top));
     right: 1rem;
-    padding: 0.5rem 0.8rem;
-    font-size: 0.85rem;
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
   }
 
   .search-history {

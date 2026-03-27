@@ -1,10 +1,15 @@
-import { useState, type FormEvent } from 'react';
+import { useEffect, useState, type FormEvent } from 'react';
 import PaperList from '../components/PaperList';
 import NetworkGraph from '../components/NetworkGraph';
 import TopPapers from '../components/TopPapers';
 import AiReport from '../components/AiReport';
-import { searchPapers } from '../services/tauriCommands';
-import { RESULT_TABS, DEFAULT_MAX_RESULTS, type TabKey } from '../config/constants';
+import { loadSettings, searchPapers } from '../services/tauriCommands';
+import {
+  RESULT_TABS,
+  DEFAULT_MAX_RESULTS,
+  normalizeMaxResults,
+  type TabKey,
+} from '../config/constants';
 import type { PaperSummary } from '../types';
 import '../styles/ResultsPage.css';
 
@@ -26,13 +31,20 @@ export default function ResultsPage({
   const [activeTab, setActiveTab] = useState<TabKey>('papers');
   const [searchInput, setSearchInput] = useState(query);
   const [loading, setLoading] = useState(false);
+  const [maxResults, setMaxResults] = useState(DEFAULT_MAX_RESULTS);
+
+  useEffect(() => {
+    loadSettings()
+      .then(s => setMaxResults(normalizeMaxResults(s.max_results)))
+      .catch(() => setMaxResults(DEFAULT_MAX_RESULTS));
+  }, []);
 
   const handleNewSearch = async (e: FormEvent) => {
     e.preventDefault();
     if (!searchInput.trim() || loading) return;
     setLoading(true);
     try {
-      const results = await searchPapers(searchInput.trim(), DEFAULT_MAX_RESULTS);
+      const results = await searchPapers(searchInput.trim(), maxResults);
       onNewSearch(results, searchInput.trim());
       setActiveTab('papers');
     } catch (err) {

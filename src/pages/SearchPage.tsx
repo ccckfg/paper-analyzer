@@ -1,10 +1,11 @@
 import { useState, useEffect, type FormEvent } from 'react';
-import { searchPapers } from '../services/tauriCommands';
+import { loadSettings, searchPapers } from '../services/tauriCommands';
 import {
   SEARCH_SUGGESTIONS,
   SEARCH_HISTORY_KEY,
   MAX_HISTORY_ITEMS,
   DEFAULT_MAX_RESULTS,
+  normalizeMaxResults,
 } from '../config/constants';
 import type { PaperSummary, SearchHistoryItem } from '../types';
 import '../styles/SearchPage.css';
@@ -19,12 +20,17 @@ export default function SearchPage({ onSearchComplete, onOpenSettings }: Props) 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [history, setHistory] = useState<SearchHistoryItem[]>([]);
+  const [maxResults, setMaxResults] = useState(DEFAULT_MAX_RESULTS);
 
   useEffect(() => {
     const saved = localStorage.getItem(SEARCH_HISTORY_KEY);
     if (saved) {
       try { setHistory(JSON.parse(saved)); } catch { /* ignore */ }
     }
+
+    loadSettings()
+      .then(s => setMaxResults(normalizeMaxResults(s.max_results)))
+      .catch(() => setMaxResults(DEFAULT_MAX_RESULTS));
   }, []);
 
   const saveHistory = (item: SearchHistoryItem) => {
@@ -40,7 +46,7 @@ export default function SearchPage({ onSearchComplete, onOpenSettings }: Props) 
     setError('');
 
     try {
-      const results = await searchPapers(searchQuery.trim(), DEFAULT_MAX_RESULTS);
+      const results = await searchPapers(searchQuery.trim(), maxResults);
       saveHistory({
         query: searchQuery.trim(),
         timestamp: Date.now(),

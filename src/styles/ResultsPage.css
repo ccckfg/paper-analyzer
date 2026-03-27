@@ -315,7 +315,7 @@
   .tab-item.active::after {
     content: '';
     position: absolute;
-    bottom: calc(6px + var(--safe-area-bottom));
+    bottom: calc(2px + var(--safe-area-bottom));
     left: 50%;
     transform: translateX(-50%);
     width: 20px;

@@ -3,6 +3,18 @@ use crate::services::{citation, pubmed};
 use std::sync::Mutex;
 use tauri::State;
 
+const DEFAULT_MAX_RESULTS: u32 = 50;
+const MIN_MAX_RESULTS: u32 = 10;
+const MAX_MAX_RESULTS: u32 = 200;
+
+fn normalize_max_results(value: u32) -> u32 {
+    if value == 0 {
+        DEFAULT_MAX_RESULTS
+    } else {
+        value.clamp(MIN_MAX_RESULTS, MAX_MAX_RESULTS)
+    }
+}
+
 /// 全局论文缓存，搜索结果在后续操作中共享
 pub struct PaperCache(pub Mutex<Vec<Paper>>);
 
@@ -13,7 +25,7 @@ pub async fn search_papers(
     max_results: u32,
     cache: State<'_, PaperCache>,
 ) -> Result<Vec<PaperSummary>, String> {
-    let max = if max_results == 0 { 50 } else { max_results };
+    let max = normalize_max_results(max_results);
 
     // 1. 搜索 PMID
     let pmids = pubmed::search_pmids(&query, max).await?;
